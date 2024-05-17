@@ -13,9 +13,10 @@ class Soldado
 		string ataque2="";
 	public:
 		bool generado = false;
+		int turno = 0;
 		Soldado();
 		~Soldado();
-		void atacar(Soldado* Soldado, int* ganador);
+		void atacar(Soldado* Soldado);
 		void generarSoldadoAleatorio();
 		void Listar();
 		//getters
@@ -28,6 +29,6 @@ class Soldado
 		string getataque2();
 		//mutador
 		double recibirAtaque(double ataque);
-
+		void setTurno(int turno);
 };
 

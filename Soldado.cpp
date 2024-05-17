@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #pragma once
 using namespace std;
+int rand();
 
 Soldado::Soldado() {
 	setlocale(LC_ALL, "spanish");
@@ -11,11 +12,11 @@ Soldado::Soldado() {
 Soldado::~Soldado() {
 }
 
-void Soldado::atacar(Soldado* soldado_recibiente,int* ganador) {
+void Soldado::atacar(Soldado* soldado_recibiente) {
 	double ataque1 = 0;
 	double ataque2 = 0;
 	double ataque_total = 0;
-	if (getsalud() > 0) {
+	if (getsalud() > 0 && soldado_recibiente->getsalud() !=0) {
 		switch (tipo_soldado) {
 		case 1: {
 			ataque1 = 10 + getVelocidad() + getdanio();
@@ -34,15 +35,8 @@ void Soldado::atacar(Soldado* soldado_recibiente,int* ganador) {
 		cout << endl << "Ataque 1 de soldado " << gettipo() << " = " << ataque1;
 		cout << endl << "Ataque 2 de soldado " << gettipo() << " = " << ataque2;
 		cout << endl << "Ataque Total de soldado " << gettipo() << " = " << ataque_total << endl;
-		cout << endl << "Vida soldado " << gettipo() << "después de recibir el ataque = "<< soldado_recibiente->recibirAtaque(ataque_total);
-	}else{
-		salud = 0;
-		*ganador = 1;
-		cout << endl << "¡Soldado" << endl;
+		cout << endl << "Vida soldado " << soldado_recibiente->gettipo() << " después de recibir el ataque = "<< soldado_recibiente->recibirAtaque(ataque_total)<<endl;
 	}
-	
-	
-
 }
 void Soldado::generarSoldadoAleatorio() {
 	generado = true;
@@ -113,5 +107,13 @@ string Soldado::getataque2() {
 }
 double Soldado::recibirAtaque(double ataque) {
 	salud = salud - ataque;
+	if (salud < 0) {
+		salud = 0;
+		
+	}
+	
 	return salud;
+}
+void Soldado::setTurno(int turno) {
+	this->turno = turno;
 }
