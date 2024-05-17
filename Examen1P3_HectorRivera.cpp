@@ -8,13 +8,13 @@ using namespace std;
 
 int rand();
 
-void Crear_Soldados(Soldado* soldado1, Soldado* soldado2) {
+void Crear_Soldados(Soldado* soldado1, Soldado* soldado2) { //aquí genero los 2 soldados usando el método generarSoldadoAleatorio() que está dentro de la clase.
 	soldado1 -> generarSoldadoAleatorio();
 	soldado2 -> generarSoldadoAleatorio();
 	cout << endl<<"Soldados Generados Correctamente"<<endl<<endl;
 }
 
-void Listar_Soldados(Soldado* soldado1, Soldado* soldado2) {
+void Listar_Soldados(Soldado* soldado1, Soldado* soldado2) { //aquí uso el método listar que está dentro de las clases para poder imprimir de manera más sencilla.
 	cout << endl<< "Soldado 1: "<< endl;
 	soldado1 -> Listar();
 	cout << endl << "Soldado 2: " << endl;
@@ -23,7 +23,7 @@ void Listar_Soldados(Soldado* soldado1, Soldado* soldado2) {
 }
 void Batalla_de_Soldados(Soldado* soldado1, Soldado* soldado2) {
 	int turno = 0;
-	if (soldado1 ->getsalud() != 0 || soldado2->getsalud() != 0){
+	if (soldado1 ->getsalud() != 0 || soldado2->getsalud() != 0){ //En este método antes de realizar la batalla valido que ambos tengan vida, después usando los punteros de soldado1 y soldado2 realizo la batalla dentro de los objetos.
 		while (true) {
 			soldado1->atacar(soldado2);
 			soldado2->atacar(soldado1);

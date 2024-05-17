@@ -36,7 +36,7 @@ void Soldado::atacar(Soldado* soldado_recibiente) {
 			cout << endl << "Ataque 1 de soldado " << gettipo() << " = " << ataque1;
 			cout << endl << "Ataque 2 de soldado " << gettipo() << " = " << ataque2;
 			cout << endl << "Ataque Total de soldado " << gettipo() << " = " << ataque_total << endl;
-			int vidaDespues = soldado_recibiente->getsalud() - ataque_total;
+			int vidaDespues = soldado_recibiente->getsalud() - ataque_total; //Aquí se realizan los cálculos antes del mensaje y se valida que no se menor que 0.
 			if (vidaDespues<0){
 				vidaDespues = 0;
 			}
@@ -116,7 +116,7 @@ void Soldado::recibirAtaque(double ataque) {
 	salud = salud - ataque;
 	if (salud < 0) {
 		salud = 0;
-		cout << endl << "¡ha Ganado soldado " << (turno == 1 ? "2!" : "1!")<<endl;
+		cout << endl << "¡ha Ganado soldado " << (turno == 1 ? "2!" : "1!")<<endl;//Aqui valida cuando se muere uno de los dos Soldados y luego de eso le pone la vida en 0 para que no tenga vida negativa. Tambien manda el mensaje cuando se finaliza la batalla.
 	}
 }
 void Soldado::setTurno(int turno) {
