@@ -22,13 +22,19 @@ void Listar_Soldados(Soldado* soldado1, Soldado* soldado2) {
 	cout << endl;
 }
 void Batalla_de_Soldados(Soldado* soldado1, Soldado* soldado2) {
-	while (true) {
-		soldado1->atacar(soldado2);
-		soldado2->atacar(soldado1);
-		if (soldado1->getsalud() == 0|| soldado2->getsalud() == 0){
-			break;
+	int turno = 0;
+	if (soldado1 ->getsalud() != 0 || soldado2->getsalud() != 0){
+		while (true) {
+			soldado1->atacar(soldado2);
+			soldado2->atacar(soldado1);
+			if (soldado1->getsalud() == 0 || soldado2->getsalud() == 0) {
+				break;
+			}
 		}
+	}else{
+		cout << endl << "vuelva a generar esta pelea ya se realizo" << endl;
 	}
+	
 
 }
 void menu() {

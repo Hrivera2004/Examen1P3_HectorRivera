@@ -16,26 +16,33 @@ void Soldado::atacar(Soldado* soldado_recibiente) {
 	double ataque1 = 0;
 	double ataque2 = 0;
 	double ataque_total = 0;
-	if (getsalud() > 0 && soldado_recibiente->getsalud() !=0) {
-		switch (tipo_soldado) {
-		case 1: {
-			ataque1 = 10 + getVelocidad() + getdanio();
-			ataque2 = 5 + getVelocidad() + getdanio();
-		}break;
-		case 2: {
-			ataque1 = 8 + getVelocidad() + getdanio();
-			ataque2 = 12 + getVelocidad() + getdanio();
-		}break;
-		case 3: {
-			ataque1 = 7 + getVelocidad() + getdanio();
-			ataque2 = 15 + getVelocidad() + getdanio();
-		}break;
+	if (getsalud() > 0) {
+		if (soldado_recibiente->getsalud() != 0){
+			switch (tipo_soldado) {
+			case 1: {
+				ataque1 = 10 + getVelocidad() + getdanio();
+				ataque2 = 5 + getVelocidad() + getdanio();
+			}break;
+			case 2: {
+				ataque1 = 8 + getVelocidad() + getdanio();
+				ataque2 = 12 + getVelocidad() + getdanio();
+			}break;
+			case 3: {
+				ataque1 = 7 + getVelocidad() + getdanio();
+				ataque2 = 15 + getVelocidad() + getdanio();
+			}break;
+			}
+			ataque_total = (ataque1 + ataque2) * (getfuerza() / 100);
+			cout << endl << "Ataque 1 de soldado " << gettipo() << " = " << ataque1;
+			cout << endl << "Ataque 2 de soldado " << gettipo() << " = " << ataque2;
+			cout << endl << "Ataque Total de soldado " << gettipo() << " = " << ataque_total << endl;
+			int vidaDespues = soldado_recibiente->getsalud() - ataque_total;
+			if (vidaDespues<0){
+				vidaDespues = 0;
+			}
+			cout << endl << "Vida soldado " << soldado_recibiente->gettipo() << " después de recibir el ataque = " << vidaDespues << endl;
+			soldado_recibiente->recibirAtaque(ataque_total);
 		}
-		ataque_total = (ataque1 + ataque2) * (getfuerza() / 100);
-		cout << endl << "Ataque 1 de soldado " << gettipo() << " = " << ataque1;
-		cout << endl << "Ataque 2 de soldado " << gettipo() << " = " << ataque2;
-		cout << endl << "Ataque Total de soldado " << gettipo() << " = " << ataque_total << endl;
-		cout << endl << "Vida soldado " << soldado_recibiente->gettipo() << " después de recibir el ataque = "<< soldado_recibiente->recibirAtaque(ataque_total)<<endl;
 	}
 }
 void Soldado::generarSoldadoAleatorio() {
@@ -105,14 +112,12 @@ string Soldado::getataque1() {
 string Soldado::getataque2() {
 	return ataque2;
 }
-double Soldado::recibirAtaque(double ataque) {
+void Soldado::recibirAtaque(double ataque) {
 	salud = salud - ataque;
 	if (salud < 0) {
 		salud = 0;
-		
+		cout << endl << "¡ha Ganado soldado " << (turno == 1 ? "2!" : "1!")<<endl;
 	}
-	
-	return salud;
 }
 void Soldado::setTurno(int turno) {
 	this->turno = turno;

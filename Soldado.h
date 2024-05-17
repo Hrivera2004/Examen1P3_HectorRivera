@@ -28,7 +28,7 @@ class Soldado
 		string getataque1();
 		string getataque2();
 		//mutador
-		double recibirAtaque(double ataque);
+		void recibirAtaque(double ataque);
 		void setTurno(int turno);
 };
 
