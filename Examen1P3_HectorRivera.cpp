@@ -23,17 +23,23 @@ void Listar_Soldados(Soldado* soldado1, Soldado* soldado2) { //aquí uso el métod
 }
 void Batalla_de_Soldados(Soldado* soldado1, Soldado* soldado2) {
 	int turno = 0;
-	if (soldado1 ->getsalud() != 0 || soldado2->getsalud() != 0){ //En este método antes de realizar la batalla valido que ambos tengan vida, después usando los punteros de soldado1 y soldado2 realizo la batalla dentro de los objetos.
-		while (true) {
-			soldado1->atacar(soldado2);
-			soldado2->atacar(soldado1);
-			if (soldado1->getsalud() == 0 || soldado2->getsalud() == 0) {
-				break;
+	if (soldado1->generado && soldado2->generado){
+		if (soldado1->getsalud() != 0 || soldado2->getsalud() != 0) { //En este método antes de realizar la batalla valido que ambos tengan vida, después usando los punteros de soldado1 y soldado2 realizo la batalla dentro de los objetos.
+			while (true) {
+				soldado1->atacar(soldado2);
+				soldado2->atacar(soldado1);
+				if (soldado1->getsalud() == 0 || soldado2->getsalud() == 0) {
+					break;
+				}
 			}
 		}
+		else {
+			cout << endl << "vuelva a generar esta pelea ya se realizo" << endl;
+		}
 	}else{
-		cout << endl << "vuelva a generar esta pelea ya se realizo" << endl;
+		cout << endl << "Error genere los soldados primero" << endl<<endl;
 	}
+	
 	
 
 }

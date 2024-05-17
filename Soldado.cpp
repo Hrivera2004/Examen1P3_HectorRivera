@@ -13,43 +13,37 @@ Soldado::~Soldado() {
 }
 
 void Soldado::atacar(Soldado* soldado_recibiente) {
-	if (generado){
-		double ataque1 = 0;
-		double ataque2 = 0;
-		double ataque_total = 0;
-		if (getsalud() > 0) {
-			if (soldado_recibiente->getsalud() != 0) {
-				switch (tipo_soldado) {
-				case 1: {
-					ataque1 = 10 + getVelocidad() + getdanio();
-					ataque2 = 5 + getVelocidad() + getdanio();
-				}break;
-				case 2: {
-					ataque1 = 8 + getVelocidad() + getdanio();
-					ataque2 = 12 + getVelocidad() + getdanio();
-				}break;
-				case 3: {
-					ataque1 = 7 + getVelocidad() + getdanio();
-					ataque2 = 15 + getVelocidad() + getdanio();
-				}break;
-				}
-				ataque_total = (ataque1 + ataque2) * (getfuerza() / 100);
-				cout << endl << "Ataque 1 de soldado " << gettipo() << " = " << ataque1;
-				cout << endl << "Ataque 2 de soldado " << gettipo() << " = " << ataque2;
-				cout << endl << "Ataque Total de soldado " << gettipo() << " = " << ataque_total << endl;
-				int vidaDespues = soldado_recibiente->getsalud() - ataque_total; //Aquí se realizan los cálculos antes del mensaje y se valida que no se menor que 0.
-				if (vidaDespues < 0) {
-					vidaDespues = 0;
-				}
-				cout << endl << "Vida soldado " << soldado_recibiente->gettipo() << " después de recibir el ataque = " << vidaDespues << endl;
-				soldado_recibiente->recibirAtaque(ataque_total);
+	double ataque1 = 0;
+	double ataque2 = 0;
+	double ataque_total = 0;
+	if (getsalud() > 0) {
+		if (soldado_recibiente->getsalud() != 0){
+			switch (tipo_soldado) {
+			case 1: {
+				ataque1 = 10 + getVelocidad() + getdanio();
+				ataque2 = 5 + getVelocidad() + getdanio();
+			}break;
+			case 2: {
+				ataque1 = 8 + getVelocidad() + getdanio();
+				ataque2 = 12 + getVelocidad() + getdanio();
+			}break;
+			case 3: {
+				ataque1 = 7 + getVelocidad() + getdanio();
+				ataque2 = 15 + getVelocidad() + getdanio();
+			}break;
 			}
+			ataque_total = (ataque1 + ataque2) * (getfuerza() / 100);
+			cout << endl << "Ataque 1 de soldado " << gettipo() << " = " << ataque1;
+			cout << endl << "Ataque 2 de soldado " << gettipo() << " = " << ataque2;
+			cout << endl << "Ataque Total de soldado " << gettipo() << " = " << ataque_total << endl;
+			int vidaDespues = soldado_recibiente->getsalud() - ataque_total; //Aquí se realizan los cálculos antes del mensaje y se valida que no se menor que 0.
+			if (vidaDespues<0){
+				vidaDespues = 0;
+			}
+			cout << endl << "Vida soldado " << soldado_recibiente->gettipo() << " después de recibir el ataque = " << vidaDespues << endl;
+			soldado_recibiente->recibirAtaque(ataque_total);
 		}
 	}
-	else {
-		cout << endl << "Error genere los soldados primero" << endl;
-	}
-	
 }
 void Soldado::generarSoldadoAleatorio() {
 	generado = true;
